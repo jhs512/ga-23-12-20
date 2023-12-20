@@ -6,19 +6,21 @@ on:
 jobs:
   hello1:
     runs-on: ubuntu-latest
+    outputs:
+      username: ${{ steps.set_var.outputs.username }}
     steps:
       - name: sayHi
         run: echo "Hi"
-      - name: Wait for 10 seconds
-        run: sleep 10  # 10초 대기
-      - name: sayMyName
-        run: echo "${{ github.actor }}"
+      - name: Wait for 3 seconds
+        run: sleep 3
+      - name: Set username
+        id: set_var
+        run: echo "username=${{ github.actor }}" >> $GITHUB_ENV
   hello2:
+    needs: [hello1]
     runs-on: ubuntu-latest
     steps:
       - name: sayHi
         run: echo "Hi"
-      - name: Wait for 20 seconds
-        run: sleep 20  # 20초 대기
       - name: sayMyName
-        run: echo "${{ github.actor }}"
+        run: echo "Username from hello1 is ${{ needs.hello1.outputs.username }}"
