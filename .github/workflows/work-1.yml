@@ -2,10 +2,10 @@ name: work-1
 on:
   push:
     paths:
-      - '.github/workflows/**'
-      - 'src/**'
-      - 'build.gradle'
-      - 'Dockerfile'
+      - ".github/workflows/**"
+      - "src/**"
+      - "build.gradle"
+      - "Dockerfile"
     branches:
       - main
 jobs:
@@ -49,7 +49,7 @@ jobs:
         run: |
           echo "OWNER_LC=${OWNER,,}" >> ${GITHUB_ENV}
         env:
-          OWNER: '${{ github.repository_owner }}'
+          OWNER: "${{ github.repository_owner }}"
       - name: 빌드 앤 푸시
         uses: docker/build-push-action@v3
         with:
