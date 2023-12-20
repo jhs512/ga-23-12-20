@@ -7,7 +7,7 @@ jobs:
   hello1:
     runs-on: ubuntu-latest
     outputs:
-      username: "메롱"
+      username: $username
     steps:
       - name: sayHi
         run: echo "Hi"
