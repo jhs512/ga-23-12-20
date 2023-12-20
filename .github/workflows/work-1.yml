@@ -7,7 +7,7 @@ jobs:
   hello1:
     runs-on: ubuntu-latest
     outputs:
-      username: $username
+      username: ${{ steps.set_var.outputs.username }}
     steps:
       - name: sayHi
         run: echo "Hi"
