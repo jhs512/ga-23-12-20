@@ -15,7 +15,7 @@ jobs:
         run: sleep 3
       - name: Set username
         id: set_var
-        run: echo "username=${{ github.actor }}" >> $GITHUB_ENV
+        run: echo "::set-output username=${{ github.actor }}" >> $GITHUB_ENV
   hello2:
     needs: [hello1]
     runs-on: ubuntu-latest
@@ -24,22 +24,3 @@ jobs:
         run: echo "Hi"
       - name: sayMyName
         run: echo "Username from hello1 is ${{ needs.hello1.outputs.username }}"
-  job1:
-    runs-on: ubuntu-latest
-    outputs:
-      example_string: ${{ steps.set_output.outputs.example_string }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Generate string
-        id: generate_string
-        run: echo "Generated String"
-      - name: Set output
-        id: set_output
-        run: echo "::set-output name=example_string::$(echo 'Hello, World!')"
-  job2:
-    needs: job1
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get string from job1
-        run: echo "String from job1: ${{ needs.job1.outputs.example_string }}"
